@@ -1,0 +1,141 @@
+h1 {
+            color: red;
+            font-family: Times New Roman;
+            }
+h2 {
+            color: red;
+            text-align: center;
+            font-family: Times New Roman;
+            }
+h3 {
+            color: black;
+            font-family: Times New Roman;
+            text-align: justify;
+            text-indent: 30px;
+            }
+h4 {
+            color: black;
+            font-family: Times New Roman;
+            }
+.header {
+    background-image: url(/static/img/header2.jpg);
+    background-repeat: no-repeat;
+    width: 100%;
+    background-position: center center;
+}
+.text_right {
+            opacity: 0.8;
+            text-align: right;
+            text-indent: 30px;
+            padding-right: 50px;
+            border-right: 1px dotted red;
+            padding: 50px;
+            background-color: white;
+        }
+.text_left {
+            opacity: 0.8;
+            text-align: left;
+            text-indent: 30px;
+            padding-left: 50px
+            border-left: 1px dotted red;
+            padding: 50px;
+            background-color: white;
+}
+.img_right {
+            padding-right: 50px;
+        }
+.img_left {
+            padding-left: 50px;
+}
+.post {
+    width: 75%;
+}
+.button {
+}
+.btn {
+    display: inline-block;
+    background: white;
+    color: #fff;
+    width: 25%
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    border-radius: 3px;
+    margin-left: 10px;
+}
+html {
+    background-image: url(/static/img/phon3.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+* {box-sizing: border-box}
+
+.container {
+  padding: 16px;
+}
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+.registerbtn {
+  background-color: red;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+.registerbtn:hover {
+  opacity:1;
+}
+a {
+  color: dodgerblue;
+}
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+.diary {
+    background: white;
+}
+.t {
+    width: 25%;
+    text-align: center;
+    border: 5px double #000;
+}
+.t2 {
+    width: 15%;
+    text-align: center;
+    border: 5px double #000;
+}
+.t3 {
+    width: 10%;
+    text-align: center;
+    border: 5px double #000;
+}
+.vk {
+    width: 50%;
+}
+.form-signin{
+            margin-top: 80px;
+            width: 250px;
+        }
