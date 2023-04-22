@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<center><h1>Текущая успеваемость</h1>
+        <h2>Русский язык, 11 класс.</h2>
+        <h2>Подготовительная группа (ЕГЭ) С.Б.Побегалова</h2>
+</center>
+<div align="center">
+    <table class="diary">
+        <tr>
+            <td class="t">
+               <h4>
+                   День
+               </h4></td>
+            <td class="t">
+               <h4>
+                   Соболев А.С.
+               </h4></td>
+            <td class="t">
+               <h4>
+                   Малунова С.Н.
+               </h4></td>
+            <td class="t">
+               <h4>
+                   Жмышенко М.П.
+               </h4></td>
+        </tr>
+        {% for user in rows %}
+        <tr>
+            <td class="t">
+                <h4>{{user.data}}</h4>
+            </td>
+            <td class="t">
+                <h4>{{user.sobol}}</h4>
+            </td>
+            <td class="t">
+                <h4>{{user.malun}}</h4>
+            </td>
+            <td class="t">
+                <h4>{{user.zmish}}</h4>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

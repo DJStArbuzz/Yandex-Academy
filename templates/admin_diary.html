@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<center><h1>г. Ярославль</h1>
+</center>
+<div align="center">
+    <table class="diary">
+        <tr>
+            <td class="t3" width=5% >
+               <h4>
+                   №
+               </h4></td>
+            <td class="t3">
+               <h4>
+                   Фамилия
+               </h4></td>
+            <td class="t3">
+               <h4>
+                   Имя
+               </h4></td>
+            <td class="t3">
+               <h4>
+                   Отчество
+               </h4></td>
+            <td class="t3">
+               <h4>
+                   Электронная почта
+               </h4></td>
+            <td class="t3">
+               <h4>
+                    Статус
+               </h4></td>
+            <td class="t3">
+               <h4>
+                  Пароль
+               </h4></td>
+            <td class="t3">
+               <h4>
+                   Номер в системе
+               </h4></td>
+        </tr>
+        {% for user in rows %}
+        <tr>
+            <td class="t3" width=5% >
+                <h4>{{user.id}}</h4>
+            </td>
+            <td class="t3">
+                <h4>{{user.lastname}}</h4>
+            </td>
+            <td class="t3">
+                <h4>{{user.name}}</h4>
+            </td>
+            <td class="t3">
+                <h4>{{user.father_name}}</h4>
+            </td>
+            <td class="t3">
+                <h4>{{user.email}}</h4>
+            </td>
+            <td class="t3">
+                <h4>{{user.role}}</h4>
+            </td>
+            <td class="t3">
+                <h4>{{user.password}}</h4>
+            </td>
+            <td class="t3">
+                <h4>{{user.index_of_system}}</h4>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

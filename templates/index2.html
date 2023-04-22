@@ -1,0 +1,28 @@
+{% extends "base_register.html" %}
+
+{% block content %}
+<center><h1>Пользователи Yandex Академии</h1></center>
+{% for item in rows%}
+<div class="col-md6 border rounded">
+    <h2>{{item.title}}</h2>
+    <div>
+        {{item.content}}
+    </div>
+    <div>
+        ФИО - {{item.name}} {{item.lastname}} {{item.father_name}}<br>
+        Статус - {{item.role}}<br>
+        Пароль - {{item.password}}<br>
+    </div>
+    {% if current_user.is_authenticated and current_user == item.user %}
+    <div>
+        <a href="/users/{{ item.id }}" class="btn btn-warning">
+            Изменить
+        </a>
+        <a href="/users/{{ item.id }}" class="btn btn-danger">
+            Удалить
+        </a>
+    </div>
+{% endif %}
+</div>
+{% endfor %}
+{% endblock %}
