@@ -110,6 +110,24 @@ def login():
     return render_template('login.html', title='Авторизация', form=form)
 
 
+@app.route('/news',  methods=['GET', 'POST'])
+@login_required
+def add_news():
+    form = NewsForm()
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        news = News()
+        news.title = form.title.data
+        news.content = form.content.data
+        news.is_private = form.is_private.data
+        current_user.news.append(news)
+        db_sess.merge(current_user)
+        db_sess.commit()
+        return redirect('/diary')
+    return render_template('news.html', title='Добавление новости',
+                           form=form)
+
+
 @app.route('/news/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_news(id):
@@ -164,7 +182,6 @@ def news_delete(id):
 def logout():
     logout_user()
     return redirect("/diary")
-
 
 
 if __name__ == '__main__':

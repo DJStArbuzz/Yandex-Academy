@@ -1,13 +1,11 @@
 import vk_api
 from vk_api.longpoll import VkEventType, VkLongPoll
 
-import calendar
 import random
 import pymorphy2
 import datetime
-import os
+import sqlite3
 import wikipedia
-
 
 with open('info.txt') as f:
     information = f.readlines()
@@ -16,7 +14,6 @@ with open('info.txt') as f:
 TOKEN, LOGIN, PASSWORD = information[0], information[1], information[2]
 ALBUM_ID, GROUP_ID = 291952495, 219504995
 FLAG = True
-
 
 vk = vk_api.VkApi(token=TOKEN)
 longpoll = VkLongPoll(vk)
@@ -37,7 +34,6 @@ operation = ['Время',
              'Мои оценки',
              'Работы',
              'Новости',
-             'Календарь',
              'Определение',
              'Формы',
              'Отметиться']
@@ -61,6 +57,13 @@ my_akk = ['ФИО',
           'Рейтинг',
           'Баллы',
           'Все']
+
+objects = ['Математика',
+           'Русский язык',
+           'Химия',
+           'Физкультура',
+           'Информатика']
+
 # Выводится конкретная информация о пользователе
 exams = ['КР',
          'ПР',
@@ -196,6 +199,23 @@ def my_projects():
         send_message(chat_id, result)
 
 
+def my_marks():
+    con = sqlite3.connect("db/mark.db")
+    cur = con.cursor()
+    res = cur.execute("SELECT math, russian, chemistry, pe, it FROM example").fetchall()
+    sum_1, sum_2, sum_3, sum_4, sum_5 = 0, 0, 0, 0, 0
+    n = len(res)
+    for i in res:
+        sum_1 += int(i[0]) if i[0] != '-' else 1
+        sum_2 += int(i[1]) if i[1] != '-' else 1
+        sum_3 += int(i[2]) if i[2] != '-' else 1
+        sum_4 += int(i[3]) if i[3] != '-' else 1
+        sum_5 += int(i[4]) if i[4] != '-' else 1
+    sp_ob = [sum_1, sum_2, sum_3, sum_4, sum_5]
+    for i in range(len(objects)):
+        send_message(chat_id, f'{objects[i]} - {sp_ob[i] / n}')
+
+
 def wiki_time():
     global FLAG
     for event2 in longpoll.listen():
@@ -256,7 +276,10 @@ def morphy_time_work(text):
 
 
 def my_work():
-    pass
+    with open('schedule/exams.txt', encoding='utf8') as f:
+        sp = f.readlines()
+    for i in range(len(exams)):
+        send_message(chat_id, f'{exams[i]} - {sp[i]}')
 
 
 def news():
@@ -301,11 +324,11 @@ for event in longpoll.listen():
                     my_projects()
                     """Мои проекты"""
                 elif msg == operation[5]:
-                    send_message(chat_id, '')
-                    pass
+                    send_message(chat_id, 'Ваши оценки в текущей четверти')
+                    my_marks()
                     """Мои оценки"""
                 elif msg == operation[6]:
-                    send_message(chat_id, '')
+                    send_message(chat_id, 'Ближайшие работы')
                     my_work()
                     """Работы"""
                 elif msg == operation[7]:
@@ -313,20 +336,19 @@ for event in longpoll.listen():
                     news()
                     """Новости"""
                 elif msg == operation[8]:
-                    send_message(chat_id, '1233')
-                    """Календарь"""
-                elif msg == operation[9]:
                     send_message(chat_id, 'И что вы хотите узнать?')
                     wiki_time()
                     """Определение"""
-                elif msg == operation[10]:
+                elif msg == operation[9]:
                     send_message(chat_id, 'Укажите слово, которое надо изменить.')
                     morphy_time()
                     """Формы"""
-                elif msg == operation[11]:
+                elif msg == operation[10]:
                     send_message(chat_id, 'Учитель запишет вас. Молодцы, что пришли.')
                     with open('akk_info.txt', 'r') as f:
                         name = f.readline().replace('\n', '')
                     with open('schedule/flag.txt', 'w') as f:
                         f.write(f'{name} пришел')
                     """Pereclichka"""
+                else:
+                    send_message(chat_id, 'Запрос неправильно написан.')
