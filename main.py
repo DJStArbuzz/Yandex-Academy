@@ -39,15 +39,18 @@ def teach():
 @app.route("/diary/admin")
 def admin_place():
     db_sess = db_session.create_session()
-    if current_user.role == 'Администратор':
-        rows = db_sess.query(User).all()
-        return render_template("index2.html", rows=rows)
-    elif current_user.role == 'Учитель':
-        marks = db_sess.query(Rus).all()
-        return render_template("index3.html", rows=marks)
-    else:
-        example = db_sess.query(Example).all()
-        return render_template("marks_example.html", rows=example)
+    try:
+        if current_user.role == 'Администратор':
+            rows = db_sess.query(User).all()
+            return render_template("index2.html", rows=rows)
+        elif current_user.role == 'Учитель':
+            marks = db_sess.query(Rus).all()
+            return render_template("index3.html", rows=marks)
+        elif current_user.role == 'Ученик':
+            example = db_sess.query(Example).all()
+            return render_template("marks_example.html", rows=example)
+    except AttributeError:
+        return render_template('main.html')
 
 
 @login_manager.user_loader
@@ -174,7 +177,7 @@ def news_delete(id):
         db_sess.commit()
     else:
         abort(404)
-    return redirect('/')
+    return redirect('/diary')
 
 
 @app.route('/logout')

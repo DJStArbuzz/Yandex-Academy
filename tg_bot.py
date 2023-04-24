@@ -46,7 +46,6 @@ async def start(update, context):
     """Отправляет сообщение, когда получена команда /start"""
     user = update.effective_user
     await update.message.reply_html(
-        rf"Привет {user.mention_html()}! Я эхо-бот. Напишите мне что-нибудь, и я пришлю это назад!",
         f"Привет {user.mention_html()}! Я специальный бот Яндекс Академии. Напишите мне что-нибудь, "
         f"и я отвечу!",
     )
